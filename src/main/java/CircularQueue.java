@@ -2,7 +2,7 @@ public class CircularQueue {
     private int head = -1;
     private int tail = -1;
     private int[] queue ;
-    private static final int CAPACITY = 16;
+    private static final int CAPACITY = 6;
 
     public  CircularQueue() {
         queue = new int[CAPACITY];
@@ -11,7 +11,8 @@ public class CircularQueue {
     public void  enqueue(int element) {
          if(isfull()) throw new ArrayStoreException("queue is full");
          if(isempty()) head++;
-         queue[++tail] = element;
+         tail = nextpointerisheade();
+         queue[tail] = element;
 
     }
 
@@ -27,11 +28,11 @@ public class CircularQueue {
     }
 
     public boolean isfull() {
-             return (head+1  == nextpointerisheade());
+             return (!isempty() &&head  == nextpointerisheade());
     }
 
     public int nextpointerisheade() {
-        if(++tail == CAPACITY) return  0;
-         return  tail;
+        if(tail+1 == CAPACITY) return  0;
+         return  tail+1;
     }
 }
