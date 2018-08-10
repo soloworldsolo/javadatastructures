@@ -5,15 +5,9 @@ public class Inorder {
 
     public void Traverse(Node node) {
         if(node==null) return;
-        if(node.getLeft()!= null) {
             Traverse(node.getLeft());
             System.out.println(node.getValue());
-            Traverse(node.getRight());
-        }
-        else {
-            System.out.println(node.getValue());
-            Traverse(node.getRight());
-        }
+            Traverse(node.getRight());      
     }
 
     public Inorder(Node node) {
