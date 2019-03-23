@@ -23,8 +23,8 @@ public class CircularQueue<E> {
 
     public E poll() {
          if(isEmpty ()) throw new EmptyStackException ();
-         E element=(E) queue[head++];
-
+         E element=(E) queue[head++ % CAPACITY];
+         -- tail;
          return element;
     }
 
@@ -37,6 +37,6 @@ public class CircularQueue<E> {
     }
 
     public int nextPointInHeader() {
-        return ((tail-head)%CAPACITY);
+        return (tail+head) % CAPACITY;
     }
 }
