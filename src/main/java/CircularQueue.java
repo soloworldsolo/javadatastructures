@@ -1,35 +1,42 @@
+import java.util.EmptyStackException;
+
 public class CircularQueue<E> {
-    private int head = -1;
-    private int tail = -1;
+    private int head = 0;
+    private int tail = 0;
     private Object[] queue ;
-    private static final int CAPACITY = 6;
+    private  int CAPACITY;
 
     public  CircularQueue() {
+       this(6);
+    }
+
+    public CircularQueue(int capacity) {
+        this.CAPACITY = capacity;
         queue = (E[])new Object[CAPACITY];
     }
 
     public void  add(E element) {
          if(isFull ()) throw new ArrayStoreException("queue is full");
-         if(isEmpty ()) head++;
-         tail = nextPointInHeader ();
-         queue[tail] = element;
+         queue[nextPointInHeader ()] = element;
+         tail++;
     }
 
     public E poll() {
-         if(isEmpty ()) throw new ArrayIndexOutOfBoundsException("no elelments found");
-         return (E) queue[head++];
+         if(isEmpty ()) throw new EmptyStackException ();
+         E element=(E) queue[head++];
+
+         return element;
     }
 
     public boolean isEmpty() {
-     return (head ==-1 && tail==-1);
+     return (head ==0 && tail==0);
     }
 
     public boolean isFull() {
-             return (!isEmpty () &&head  == nextPointInHeader ());
+             return (!isEmpty () && ((tail -head) == queue.length));
     }
 
     public int nextPointInHeader() {
-        if(tail+1 == CAPACITY) return  0;
-         return  tail+1;
+        return ((tail-head)%CAPACITY);
     }
 }
