@@ -1,8 +1,8 @@
 import java.util.EmptyStackException;
 
 public class CircularQueue<E> {
-    private int head = 0;
-    private int tail = 0;
+    private int head = -1;
+    private int tail = -1;
     private Object[] queue ;
     private  int CAPACITY;
 
@@ -19,6 +19,8 @@ public class CircularQueue<E> {
          if(isFull ()) throw new ArrayStoreException("queue is full");
          queue[nextPointInHeader ()] = element;
          tail++;
+         if(isEmpty ())
+             head++;
     }
 
     public E poll() {
@@ -26,19 +28,18 @@ public class CircularQueue<E> {
          int index = head++ % CAPACITY;
          E element=(E) queue[index];
          queue[index] = null;
-         -- tail;
          return element;
     }
 
     public boolean isEmpty() {
-     return (head ==0 && tail==0);
+     return head ==-1;
     }
 
     public boolean isFull() {
-             return (!isEmpty () && ((tail -head) == queue.length));
+             return  tail+1%CAPACITY == head;
     }
 
     public int nextPointInHeader() {
-        return (tail+head) % CAPACITY;
+        return (tail+1) % CAPACITY;
     }
 }

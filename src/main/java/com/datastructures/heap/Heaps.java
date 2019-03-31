@@ -1,5 +1,7 @@
 package com.datastructures.heap;
 
+import java.util.PriorityQueue;
+
 public class Heaps {
 
 
@@ -30,7 +32,7 @@ public class Heaps {
 
     protected   void heapify(int index) {
       int leftchildindex = (2*index);
-      int rightchild = (2*index)+1;
+      int rightchild = leftchildindex+1;
       int greatest  = -1;
       if(index < max_index && index>0) {
           if (getNodevalue(leftchildindex) > heap[index-1])
@@ -66,9 +68,10 @@ public class Heaps {
     }
 
     public void buildHeap() {
-        int i = (heap.length /2)+1;
+        int i = (heap.length>>>1)+1;
         while(i>=0) {
            heapify(--i);
+            PriorityQueue<String> hello = new PriorityQueue<> ();
 
         }
     }
